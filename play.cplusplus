@@ -1,0 +1,55 @@
+#include <iostream>
+#include <string>
+
+int main() {
+
+   double weight;
+   int barbell_lift_reps;
+   double estimated_max;
+   std::string unit;
+   double unit_result;
+
+    std::cout << "******************** Flawless Guy Tracker ***************+++***" << '\n';
+
+    std::cout << "Enter your unit to covert (kgs/lbs): ";
+    std::cin >> unit;
+
+    if (unit == "kgs"  unit == "KGS") {
+        std::cout << "Enter your weight in pounds: ";
+        std::cin >> weight;
+        unit_result = weight *  0.45;
+        std::cout << "Your weight in kg is: " << unit_result << '\n';
+    }
+    else if (unit == "lbs"  unit == "LBS") {
+        std::cout << "Enter your weight in kilograms: ";
+        std::cin >> weight;
+        unit_result = weight * 2.20;
+        std::cout << "Your weight in pound is: " << unit_result << '\n';
+    }
+    else {
+         std::cout << "Invaild unit!!!";
+     }
+
+    std::cout << "How many barbell reps did you lift? : ";
+    std::cin >> barbell_lift_reps;
+
+    estimated_max = weight * (1 + barbell_lift_reps / 30);
+    std::cout << "Result: Your estimated max is: " << estimated_max << '\n';
+
+    if (estimated_max >= 90) {
+        std::cout << "You got elite balls to become a pro!";
+    }
+    else if (estimated_max >= 80 && estimated_max < 90) {
+        std::cout << "You got a chance to become a professional!";
+    }
+    else if (estimated_max >= 60 && estimated_max < 80) {
+        std::cout << "Average Guy!";
+    }
+    else {
+        std::cout << "Rookie.........";
+    }
+
+
+
+    return 0;
+}
