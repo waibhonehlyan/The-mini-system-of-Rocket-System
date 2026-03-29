@@ -1,0 +1,85 @@
+#include <iostream>
+#include <string>
+
+int main() {
+
+    double current_altitude = 0;
+    double target_altitude = 0;
+    double battery_level = 0;
+    double powerstation = 10000000.0;
+    bool isengine_on = false;
+    char choice;
+    std::string input;
+    double speed_usage = 0.0;
+    double speed_storage = 100.0;
+    
+
+    std::cout << "********************ROCKET CONTROL************************\n";
+
+    while (true) {
+        std::cout << "Turn On the engine? (Y/N): ";
+        std::cin >> choice;
+
+        if (choice == 'Y'  choice == 'y') {
+            std::cout << "The system has turned on the engine.\n";
+            isengine_on = true;
+            break;
+        }
+        else if (choice == 'N'  choice == 'n') {
+            std::cout << "The system has turned off the engine.\n";
+            break;
+        }
+        else {
+            std::cout << "ERROR COMMAND!!!! Try again.\n";
+        }
+    }
+
+    std::cout << "POWER STATION LEVEL: " << powerstation << "%\n";
+    std::cout << "Enter the battery: ";
+    std::cin >> battery_level;
+    powerstation -= battery_level;
+    std::cout << "Battery level: " << battery_level << "%\n";
+
+    std::cout << "=======================Speed Usage==========================\n";
+    std::cout << "Speed Storage: " << speed_storage << "%\n";
+
+    std::cout << "Speed Usage: ";
+    std::cin >> speed_usage;
+    speed_storage -= speed_usage;
+
+    if (isengine_on) {
+
+        std::cout << "Enter target altitude OR type MOON: ";
+        std::cin >> input;
+
+        if (input == "MOON" || input == "moon") {
+            target_altitude = 384400;
+            std::cout << "The moon destination is 384,400 KM.\n";
+        } else {
+            target_altitude = std::stod(input);
+        }
+
+        for (current_altitude = 0; current_altitude <= target_altitude; current_altitude += speed_usage) {
+            battery_level -= (0.5 * speed_usage);
+
+            std::cout << current_altitude << " KM\n";
+            std::cout << "Battery level: " << battery_level << "%\n";
+
+            if (battery_level <= 0) {
+                std::cout << "Battery depleted! Mission failed.\n";
+                return 0;
+            }
+        }
+
+        std::cout << "*****************************************************\n";
+
+        std::cout << "You have reached your destination.\n";
+        std::cout << "Your destination: " << target_altitude << " KM\n";
+        std::cout << "Remaining battery level: " << battery_level << "%\n";
+        std::cout << "Power station level: " << powerstation << "%\n";
+
+        std::cout << "*****************************************************\n";
+    }
+
+    return 0;
+}
